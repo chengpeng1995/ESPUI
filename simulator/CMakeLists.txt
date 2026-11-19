@@ -1,0 +1,45 @@
+cmake_minimum_required(VERSION 3.20)
+project(round_assistant_simulator LANGUAGES C CXX)
+set(CMAKE_C_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+get_filename_component(PROJECT_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/.." ABSOLUTE)
+set(ESPUI_TOOLCHAIN_ROOT "$ENV{ESPUI_TOOLCHAIN_ROOT}" CACHE PATH "Shared ESP-IDF toolchain directory")
+if(NOT ESPUI_TOOLCHAIN_ROOT)
+    message(FATAL_ERROR "Set ESPUI_TOOLCHAIN_ROOT or configure using scripts/simulator.sh")
+endif()
+set(LV_BUILD_CONF_PATH "${CMAKE_CURRENT_SOURCE_DIR}/lv_conf.h" CACHE PATH "" FORCE)
+set(CONFIG_LV_BUILD_DEMOS OFF CACHE BOOL "" FORCE)
+set(CONFIG_LV_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+set(CONFIG_LV_USE_THORVG_INTERNAL OFF CACHE BOOL "" FORCE)
+find_package(SDL2 REQUIRED CONFIG)
+if(EXISTS "${PROJECT_ROOT}/managed_components/lvgl__lvgl/CMakeLists.txt")
+    set(LVGL_SOURCE "${PROJECT_ROOT}/managed_components/lvgl__lvgl")
+else()
+    message(FATAL_ERROR "Project LVGL dependency missing; configure firmware with scripts/idf.sh reconfigure first.")
+endif()
+add_subdirectory("${LVGL_SOURCE}" lvgl)
+target_link_libraries(lvgl PUBLIC SDL2::SDL2)
+file(GLOB_RECURSE MOONCAKE_SOURCES CONFIGURE_DEPENDS "${PROJECT_ROOT}/components/mooncake/src/*.cpp")
+file(GLOB FONT_SOURCES CONFIGURE_DEPENDS "${PROJECT_ROOT}/assets/fonts/*.c")
+file(GLOB ICON_SOURCES CONFIGURE_DEPENDS "${PROJECT_ROOT}/assets/icons/*.c" "${PROJECT_ROOT}/assets/blue_ui/*.c")
+file(GLOB UI_SOURCES CONFIGURE_DEPENDS "${PROJECT_ROOT}/ui/*.cpp")
+set(CJSON "${ESPUI_TOOLCHAIN_ROOT}/esp-idf/components/json/cJSON")
+if(NOT EXISTS "${CJSON}/cJSON.c")
+    message(FATAL_ERROR "cJSON not found under ESPUI_TOOLCHAIN_ROOT: ${CJSON}")
+endif()
+add_executable(assistant_simulator MACOSX_BUNDLE main.cpp
+    "${PROJECT_ROOT}/core/i18n.cpp" "${PROJECT_ROOT}/core/system.cpp"
+    ${UI_SOURCES} "${PROJECT_ROOT}/platform/sim_platform.cpp"
+    "${PROJECT_ROOT}/tests/self_test.cpp" "${CJSON}/cJSON.c"
+    ${MOONCAKE_SOURCES} ${FONT_SOURCES} ${ICON_SOURCES}
+    "${PROJECT_ROOT}/components/smooth_ui_toolkit/src/core/easing/ease.cpp")
+target_include_directories(assistant_simulator PRIVATE
+    "${PROJECT_ROOT}/core" "${PROJECT_ROOT}/ui" "${PROJECT_ROOT}/platform" "${PROJECT_ROOT}/assets/fonts" "${PROJECT_ROOT}/assets/blue_ui"
+    "${PROJECT_ROOT}/components/mooncake/src" "${PROJECT_ROOT}/components/smooth_ui_toolkit/src" "${CJSON}")
+target_link_libraries(assistant_simulator PRIVATE lvgl SDL2::SDL2 m)
+target_compile_options(assistant_simulator PRIVATE -Wall -Wextra -Wno-unused-parameter -Wno-missing-field-initializers)
+set_target_properties(assistant_simulator PROPERTIES MACOSX_BUNDLE_BUNDLE_NAME "Round Assistant Simulator"
+    MACOSX_BUNDLE_GUI_IDENTIFIER "local.esp32.round-assistant" MACOSX_BUNDLE_BUNDLE_VERSION "2.6.0")
+enable_testing()
+add_test(NAME system_and_ui COMMAND $<TARGET_FILE:assistant_simulator> --self-test)

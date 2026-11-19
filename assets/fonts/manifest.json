@@ -1,0 +1,58 @@
+{
+  "font_ui_18": {
+    "size": 18,
+    "weight": "regular",
+    "glyphs": 429,
+    "source_bytes": 304123,
+    "font_sha256": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b"
+  },
+  "font_ui_28": {
+    "size": 28,
+    "weight": "regular",
+    "glyphs": 429,
+    "source_bytes": 514033,
+    "font_sha256": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b"
+  },
+  "font_cjk_22": {
+    "size": 22,
+    "weight": "regular",
+    "glyphs": 7545,
+    "source_bytes": 8308652,
+    "font_sha256": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b"
+  },
+  "font_digits_64": {
+    "size": 64,
+    "weight": "regular",
+    "glyphs": 11,
+    "source_bytes": 26567,
+    "font_sha256": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b"
+  },
+  "font_ui_20": {
+    "size": 20,
+    "weight": "regular",
+    "glyphs": 429,
+    "source_bytes": 344613,
+    "font_sha256": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b"
+  },
+  "font_ui_24": {
+    "size": 24,
+    "weight": "regular",
+    "glyphs": 429,
+    "source_bytes": 429616,
+    "font_sha256": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b"
+  },
+  "font_ui_22_bold": {
+    "size": 22,
+    "weight": "bold",
+    "glyphs": 429,
+    "source_bytes": 415908,
+    "font_sha256": "b5f0d1a190a7f9b43c310a8850630af12553df32c4c050543f9059732d9b4c0a"
+  },
+  "font_ui_28_bold": {
+    "size": 28,
+    "weight": "bold",
+    "glyphs": 429,
+    "source_bytes": 541440,
+    "font_sha256": "b5f0d1a190a7f9b43c310a8850630af12553df32c4c050543f9059732d9b4c0a"
+  }
+}

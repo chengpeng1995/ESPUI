@@ -1,0 +1,45 @@
+[
+  {
+    "repository": "m5stack/M5StopWatch-UserDemo",
+    "ref": "main",
+    "commit": "6b4aa125288b6fe9dca661f10159f6e1e5ee785c",
+    "path": "vendor/M5StopWatch"
+  },
+  {
+    "repository": "Forairaaaaa/mooncake",
+    "ref": "v2.3.3",
+    "commit": "572a7e488641f1c3f22e85d65c27f095ecf27d12",
+    "path": "components/mooncake"
+  },
+  {
+    "repository": "Forairaaaaa/mooncake_log",
+    "ref": "v1.5.0",
+    "commit": "554d55cd8c6e551b911b99cad274a46929f05bae",
+    "path": "components/mooncake_log"
+  },
+  {
+    "repository": "Forairaaaaa/smooth_ui_toolkit",
+    "ref": "v2.12.1",
+    "commit": "2c8b6c572192047636c78ea3ae95dc5be4955fce",
+    "path": "components/smooth_ui_toolkit"
+  },
+  {
+    "repository": "lewisxhe/XPowersLib",
+    "ref": "master",
+    "commit": "d6997586e68f65afd51baa775903df930db39821",
+    "path": "vendor/XPowersLib"
+  },
+  {
+    "repository": "lewisxhe/SensorLib",
+    "ref": "master",
+    "commit": "477fc682e9ed30ced39774f3b7e93a1504968884",
+    "path": "vendor/SensorLib"
+  },
+  {
+    "repository": "waveshareteam/ESP32-S3-Touch-AMOLED-1.75",
+    "ref": "main",
+    "commit": "e4344e70c2fa78a13e8a06566507f1ba8af6672a",
+    "path": "vendor/waveshare-reference",
+    "purpose": "Hardware pin reference and mixed STD/TDM audio adapter; display BSP stays 3.0.1"
+  }
+]

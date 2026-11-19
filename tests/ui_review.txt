@@ -1,0 +1,35 @@
+# Review fixtures only. All captures use simulated time and hardware.
+@UI page 20
+@UI wait 350
+@UI set input 2028-02-29 12:34
+@UI page 0
+@UI wait 350
+@UI wait 300
+@UI capture .runtime/captures-overlays/unsaved.bmp
+@UI state
+@UI click confirm.cancel
+@UI assert-page 20
+@UI click input.save
+@UI wait 350
+@UI page 5
+@UI wait 350
+@UI set timer.minutes 1
+@UI click timer.toggle
+@UI wait 350
+@UI page 20
+@UI wait 350
+@UI set input 2030-10-09 18:20
+@UI wait 60000
+@UI wait 2000
+@UI capture .runtime/captures-overlays/alert.bmp
+@UI state
+@UI swipe 233 448 233 330 240
+@UI assert-page 20
+@UI click alert.stop
+@UI capture .runtime/captures-overlays/restored.bmp
+@UI state
+@UI page 0
+@UI wait 350
+@UI capture .runtime/captures-overlays/restored-confirm.bmp
+@UI state
+@UI quit

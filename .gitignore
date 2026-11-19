@@ -1,0 +1,10 @@
+build*/
+managed_components/
+.runtime/
+sdkconfig
+sdkconfig.old
+__pycache__/
+node_modules/
+.idea/workspace.xml
+.DS_Store
+logs/
